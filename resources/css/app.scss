@@ -1,0 +1,107 @@
+$tableColor: #93bfcf;
+$backColor: #6096b4;
+$iconColor: cadetblue;
+$textColor: black;
+$navW: 700px;
+$navH: 80px;
+$ball: 100px;
+$ballColor: white;
+
+body,
+body * {
+    margin: 0;
+    position: relative;
+    background-color: $backColor;
+}
+
+.nav {
+    width: $navW;
+    height: $navH;
+    top: calc(100vh - $navH);
+    left: calc(50vw - $navW/2);
+    background-color: $tableColor;
+    position: absolute;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav a {
+    height: 50px;
+    width: $ball;
+    margin-top: calc(($navH - 50px) / 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: $tableColor;
+    position: relative;
+}
+
+.nav a:first-child {
+    margin-left: 45px;
+}
+.nav a:last-of-type {
+    margin-right: 45px;
+}
+
+.nav i {
+    font-size: 48px;
+    color: $iconColor;
+    text-align: center;
+    background-color: inherit;
+    width: 50px;
+    height: 50px;
+}
+
+.text {
+    text-align: center;
+    background-color: $tableColor;
+    display: none;
+    color: $textColor;
+}
+
+.nav a.active::before,
+.nav a.active::after {
+    transition: none; /* Remove transition */
+}
+
+.nav a.active {
+    transition: transform 0.5s;
+    transform: translateY(-78px);
+    height: $ball;
+    width: $ball;
+    border-radius: 62px;
+    background-color: $ballColor;
+    border: 12px solid $backColor;
+}
+
+.nav a.active::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 50px;
+    background-color: $tableColor;
+    border-top-right-radius: 25px;
+    box-shadow: 0px -11px 0 0 $backColor;
+    left: -32.5px;
+    top: 51px;
+}
+.nav a.active::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 50px;
+    background-color: $tableColor;
+    border-top-left-radius: 25px;
+    box-shadow: 0px -11px 0 0 $backColor;
+    right: -32.5px;
+    top: 51px;
+}
+
+.nav a.active .text {
+    display: block;
+    position: absolute;
+    top: 110px;
+}
