@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("name", 64);
             $table->string("surname", 64);
-            $table->string('idcode', 11);
+            $table->string('id_code', 11);
             $table->timestamps();
         });
     }

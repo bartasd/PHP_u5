@@ -1,43 +1,143 @@
-$fieldWith: 90vw;
-$fieldHeight: calc(90vh - 150px);
+$fieldWidth: 70vw;
+$fieldHeight: calc(88vh - 170px);
 
 .workField {
-    background-color: #2e8d785b;
-    width: $fieldWith;
+    background: url("http://localhost:8080/u5/public/elephant.png");
+    width: $fieldWidth;
     height: $fieldHeight;
     position: absolute;
-    left: calc(50vw - $fieldWith/2);
+    left: calc(50vw - $fieldWidth/2);
     top: 10vh;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    box-shadow: 10px 10px 50px 2px rgba(0, 0, 0, 0.616);
 }
 
 table {
-    width: 800px;
+    background-color: rgb(145, 85, 85);
+    width: 1000px;
     border-collapse: collapse;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin-left: 30px;
     margin-right: 30px;
+    box-shadow: 10px 10px 50px 6px rgb(87, 167, 187);
 }
   th,
   td {
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(145, 85, 85, 0.747);
     color: #fff;
     text-align: center;
   }
-  thead th, tfoot tr {
-    background-color: #6096b4;
+  thead th, tfoot td{
+    background-color: #103447;
     text-align: center;
   }
+  tfoot td{
+    width: 60px;
+  }
+  tfoot a{
+padding: 20px;
+  }
+
   tbody tr:hover {
     background-color: rgba(255, 255, 255, 0.3);
   }
-  tfoot td:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+  tfoot td{
+    background-color: rgb(145, 85, 85);
   }
 
+  td a{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(145, 85, 85);
+  }
+  .multi-button {
+    background-color: rgba(145, 85, 85, 0.747);
+    padding: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.1);
+      place-items: center;
+  }
+  #info, #info span {
+    background-color: rgb(85,131,241);
+    border: 1px solid rgb(85,131,241);
+    
+  }
+  
+  #delete, #delete span {
+    background-color: rgb(219, 75, 75);
+    border: 1px solid rgb(219, 75, 75);
+  }
+  
+  .button { 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
+    padding: 10px 17px 10px 17px;
+    color: white;
+    border-radius: 7px;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  #info span:after {
+    font-family: FontAwesome;
+    content: "\f044";
+  }
+  
+  #delete span:after {
+    font-family: FontAwesome;
+    content: "\f00d";
+  }
+
+  .rewind:before{
+    font-family: FontAwesome;
+    content: "\f04a";
+    background-color: rgb(145, 85, 85);
+    padding: 4px;
+  }
+  
+  .forward:before {
+    font-family: FontAwesome;
+    content: "\f04e";
+    background-color: rgb(145, 85, 85);
+    padding: 4px;
+  }
+
+  a.activePage{
+    font-weight: bold;
+    font-size: 28px;
+    box-shadow: 3px 3px 20px 4px rgb(227, 249, 255);
+    padding: 2px;
+    border-radius: 5px;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 30px;
+  }

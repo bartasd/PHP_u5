@@ -8,12 +8,13 @@ use App\Models\Client;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+
+    public function showAll($page = 1){
+        $clients = Client::all();
+        return view('accounts', [
+            'clients' => $clients,
+            'page' => $page
+        ]);
     }
 
     /**
@@ -21,7 +22,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('add');
     }
 
     /**
@@ -29,7 +30,8 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        //
+        Client::create($request->all());
+        return redirect()->route('clients-accounts');
     }
 
     /**

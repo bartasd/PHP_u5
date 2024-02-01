@@ -1,19 +1,32 @@
-$tableColor: #93bfcf;
-$backColor: #6096b4;
-$iconColor: cadetblue;
-$textColor: black;
+$tableColor: rgb(59, 59, 59);
+$backColor: #d2afd6;
+$iconColor: white;
+$textColor: white;
 $navW: 700px;
 $navH: 80px;
 $ball: 100px;
-$ballColor: white;
+$ballColor: rgb(64, 212, 64);
 
 body,
 body * {
     margin: 0;
     position: relative;
     background-color: $backColor;
+    font-family: 'Montserrat', sans-serif;
 }
 
+
+.logo {
+    background: linear-gradient(to right, red, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 400px;
+    text-shadow: 3px 3px 6px rgba(238, 222, 222, 0.699);
+    font-size: 42px;
+    position: absolute;
+    left: calc(50vw - 200px);
+    top: 20px;
+  }
 .nav {
     width: $navW;
     height: $navH;
@@ -21,7 +34,7 @@ body * {
     left: calc(50vw - $navW/2);
     background-color: $tableColor;
     position: absolute;
-    border-radius: 20px;
+    border-radius: 40px;
     display: flex;
     justify-content: space-around;
 }
