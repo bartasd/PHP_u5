@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('/transfer', [HomeController::class, 'transfer'])->name('transfer');
+Route::get('/', [HomeController::class, 'signout'])->name('exit');
 
 // Clients CRUD Group
 Route::prefix('clients')->name('clients-')->group(function () {

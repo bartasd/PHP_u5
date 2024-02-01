@@ -30,7 +30,9 @@
             class="{{ Request::routeIs('clients-create') ? 'active activeLara' : '' }}"><i class="fa fa-plus"
                 aria-hidden="true"></i><span class="text">Add Accounts</span></a>
         <a href="{{ route('transfer') }}" class="{{ Request::routeIs('transfer') ? 'active activeLara' : '' }}"><i
-                class="fa fa-exchange" aria-hidden="true"></i><span class="text">Transfer Funds</span></a>
+                class="fa fa-exchange" aria-hidden="true"></i><span class="text">Transfer</span></a>
+        <a href="{{ route('exit') }}" class="{{ Request::routeIs('exit') ? 'active activeLara' : '' }}"><i
+                class="fa fa-sign-out" aria-hidden="true"></i><span class="text">Sign Out</span></a>
     </div>
 </body>
 
