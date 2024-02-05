@@ -28,8 +28,20 @@
                             <td colspan="2">{{ $clients[$i]->surname }}</td>
                             <td colspan="2">{{ $clients[$i]->id_code }}</td>
                             <td colspan="2">TOTAL BALANCE</td>
-                            <td class="multi-button"><button class="button" id="info"><span>Info</span></button></td>
-                            <td class="multi-button"><button class="button" id="delete"></><span>Delete</span></td>
+                            <td class="multi-button">
+                                <button class="button" id="info">
+                                    <span>
+                                        <a href="{{ route('clients-show', ['client' => $clients[$i], 'page' => $page]) }}">
+                                            Info
+                                        </a>
+                                    </span>
+                                </button>
+                            </td>
+                            <td class="multi-button">
+                                <button class="button" id="delete">
+                                    <span>Delete</span>
+                                </button>
+                            </td>
                         </tr>
                     @else
                     @break;
@@ -49,44 +61,44 @@
                 @endphp
                 @if ($totalPages < 12)
                     @for ($i = 1; $i <= $totalPages; $i++)
-                        <td><a href="{{ route('clients-accounts.index', ['page' => $i]) }}"
+                        <td><a href="{{ route('clients-accounts.page', ['page' => $i]) }}"
                                 class="{{ $i == $page ? 'activePage' : '' }}">{{ $i }}</a>
                         </td>
                     @endfor
                 @elseif ($totalPages > 11 && $page > 4 && $page < $totalPages - 4)
-                    <td><a href="{{ route('clients-accounts.index', ['page' => $page - 1]) }}">
+                    <td><a href="{{ route('clients-accounts.page', ['page' => $page - 1]) }}">
                             <span class="rewind"></span> </a>
                     </td>
                     @for ($i = $page - 4; $i <= $page + 4; $i++)
-                        <td><a href="{{ route('clients-accounts.index', ['page' => $i]) }}"
+                        <td><a href="{{ route('clients-accounts.page', ['page' => $i]) }}"
                                 class="{{ $i == $page ? 'activePage' : '' }}">{{ $i }}</a></td>
                     @endfor
-                    <td><a href="{{ route('clients-accounts.index', ['page' => $page + 1]) }}"> <span
+                    <td><a href="{{ route('clients-accounts.page', ['page' => $page + 1]) }}"> <span
                                 class="forward"></span> </a></td>
                 @elseif($totalPages > 11 && $page <= 4)
                     @if ($page != 1)
-                        <td><a href="{{ route('clients-accounts.index', ['page' => $page - 1]) }}">
+                        <td><a href="{{ route('clients-accounts.page', ['page' => $page - 1]) }}">
                                 <span class="rewind"></span> </a>
                         </td>
                     @endif
                     @for ($i = 1; $i <= ($page == 1 ? 10 : 9); $i++)
-                        <td><a href="{{ route('clients-accounts.index', ['page' => $i]) }}"
+                        <td><a href="{{ route('clients-accounts.page', ['page' => $i]) }}"
                                 class="{{ $i == $page ? 'activePage' : '' }}">{{ $i }}</a>
                         </td>
                     @endfor
-                    <td><a href="{{ route('clients-accounts.index', ['page' => $page + 1]) }}"> <span
+                    <td><a href="{{ route('clients-accounts.page', ['page' => $page + 1]) }}"> <span
                                 class="forward"></span> </a></td>
                 @elseif($totalPages > 11 && $page >= $totalPages - 4)
-                    <td><a href="{{ route('clients-accounts.index', ['page' => $page - 1]) }}">
+                    <td><a href="{{ route('clients-accounts.page', ['page' => $page - 1]) }}">
                             <span class="rewind"></span> </a>
                     </td>
                     @for ($i = $totalPages - ($page == $totalPages ? 9 : 8); $i <= $totalPages; $i++)
-                        <td><a href="{{ route('clients-accounts.index', ['page' => $i]) }}"
+                        <td><a href="{{ route('clients-accounts.page', ['page' => $i]) }}"
                                 class="{{ $i == $page ? 'activePage' : '' }}">{{ $i }}</a>
                         </td>
                     @endfor
                     @if ($page != $totalPages)
-                        <td><a href="{{ route('clients-accounts.index', ['page' => $page + 1]) }}"> <span
+                        <td><a href="{{ route('clients-accounts.page', ['page' => $page + 1]) }}"> <span
                                     class="forward"></span> </a></td>
                     @endif
                 @endif

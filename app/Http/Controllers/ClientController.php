@@ -11,18 +11,24 @@ class ClientController extends Controller
 
     public function showAll($page = 1){
         $clients = Client::all();
-        return view('accounts', [
+        return view('clients.accounts', [
             'clients' => $clients,
             'page' => $page
         ]);
     }
-
+    public function show(Client $client, $page ){
+        return view('clients.show', [
+            'client' => $client,
+            'page' => $page
+        ]);
+    }
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('add');
+        return view('clients.add');
     }
 
     /**
@@ -35,27 +41,20 @@ class ClientController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Client $client)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Client $client)
-    {
-        //
+    {        
+        return view('clients.edit', [
+            'client' => $client,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $client->update($request->all());
+        return redirect()->route('clients-accounts');
     }
 
     /**

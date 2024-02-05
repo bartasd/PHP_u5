@@ -61,12 +61,30 @@ padding: 20px;
     background-color: rgba(145, 85, 85, 0.747);
     padding: 2px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.1);
-      place-items: center;
+    place-items: center;
   }
-  #info, #info span {
+  #info a, #go-back a{
+    background-color: rgb(85,131,241);
+  }
+  #edit a{
+    background-color: rgb(78, 201, 54);
+  }
+  #delete a{
+    background-color: rgb(219, 75, 75);
+  }
+
+  #info, #info span, #go-back, #go-back span {
     background-color: rgb(85,131,241);
     border: 1px solid rgb(85,131,241);
-    
+  }
+
+  #edit{
+    position: initial;
+  }
+
+  #edit, #edit span {
+    background-color: rgb(78, 201, 54);
+    border: 1px solid rgb(78, 201, 54);
   }
   
   #delete, #delete span {
@@ -97,6 +115,11 @@ padding: 20px;
     right: -20px;
     transition: 0.5s;
   }
+
+  .button a{
+    text-decoration: none;
+    color: white;
+  }
   
   .button:hover span {
     padding-right: 25px;
@@ -107,7 +130,11 @@ padding: 20px;
     right: 0;
   }
 
-  #info span:after {
+  #info span:after{
+    font-family: FontAwesome;
+    content: "\f06e";
+  }
+  #edit span:after {
     font-family: FontAwesome;
     content: "\f044";
   }
@@ -115,6 +142,11 @@ padding: 20px;
   #delete span:after {
     font-family: FontAwesome;
     content: "\f00d";
+  }
+
+  #go-back span:after {
+    font-family: FontAwesome;
+    content: "\f060";
   }
 
   .rewind:before{

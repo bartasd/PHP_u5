@@ -1,0 +1,120 @@
+.client{
+    width: 80%;
+    height: 80%;
+    background-color: rgb(145, 85, 85);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 10px 10px 50px 6px rgb(87, 167, 187);
+    position: relative;
+}
+
+.client-info{
+    background-color: #d2afd644;
+    width: 25%;
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    border-radius: 20px;
+    border: 1px solid white;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.client-info:hover{
+    box-shadow: 2px 2px 30px 1px white;
+}
+
+.client-info > div{
+    display: flex;
+    font-size: 16px;
+    margin-top: 20px;
+    background-color:transparent ;
+}
+
+.client-info  div{
+    background-color:transparent ;
+}
+.client-info > div:last-of-type{
+    width: 80%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-bottom: 10px;
+    gap: 10px;
+}
+
+.client-info > div > div:last-of-type{
+    margin-left: 20px;
+}
+
+.client  p, .client b{
+    background-color:transparent ;
+    padding-top: 10px;
+}
+
+
+.show-details{
+    top: 10%;
+    left: 35%;
+    width: 60%;
+    border: 1px solid white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #d2afd644;
+    align-items: center;
+}
+.client-accounts{
+    height: 60%;
+    top: 30%;
+    left: 55%;
+}
+.show-details p{
+    color: white;
+    padding: 10px;
+}
+.show-acc{
+    width: 90%;
+    box-shadow: none;
+    margin-bottom: 10px;
+}
+
+.show-acc th, .show-acc td{
+    font-size: 0.8rem;
+    padding: 0.2rem;
+    
+}
+
+.show-acc tr > th:first-of-type{
+    width: 45%;
+}
+.show-acc tr > th:nth-of-type(2){
+    width: 30%;
+}
+
+.ctrl-button{
+    border: 1px solid white;
+}
+
+.ctrl-button a{
+    color: black;
+}
+
+.ctrl-button-plus, .ctrl-button-plus a{
+    background-color: rgb(78, 201, 54);
+}
+.ctrl-button-minus, .ctrl-button-minus a{
+    background-color: rgb(248, 234, 32);
+}
+.ctrl-button-delete, .ctrl-button-delete a{
+    background-color: rgb(219, 75, 75);
+}
+
+.ctrl-button-create, .ctrl-button-create a{
+    background-color: rgb(85,131,241);
+    width: 80%;
+}

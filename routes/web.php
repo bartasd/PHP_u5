@@ -30,10 +30,10 @@ Route::prefix('clients')->name('clients-')->group(function () {
     Route::get('/add', [C::class, 'create'])->name('create');
     Route::post('/add', [C::class, 'store'])->name('store');
     Route::get('/accounts', [C::class, 'showAll'])->name('accounts');
-    Route::get('/accounts/{page}', [C::class, 'showAll'])->name('accounts.index');
-    //Route::get('/{client}', [C::class, 'show'])->name('show');
-    //Route::get('/{client}/edit', [C::class, 'edit'])->name('edit');
-    //Route::put('/{client}', [C::class, 'update'])->name('update');
+    Route::get('/accounts/{page}', [C::class, 'showAll'])->name('accounts.page');
+    Route::get('/{client}/{page}', [C::class, 'show'])->name('show');
+    Route::get('/{client}/edit', [C::class, 'edit'])->name('edit');
+    Route::post('/{client}', [C::class, 'update'])->name('update');
     //Route::get('/{client}/delete', [C::class, 'delete'])->name('delete');
     //Route::delete('/{client}', [C::class, 'destroy'])->name('destroy');
 });
