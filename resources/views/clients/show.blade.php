@@ -17,12 +17,12 @@
             <div>
                 <button class="button" id="edit">
                     <span>
-                        <a href="{{ route('clients-edit', $client) }} ">Edit</a>
+                        <a href={{ route('clients-edit', $client) }}>Edit</a>
                     </span>
                 </button>
                 <button class="button" id="go-back">
                     <span>
-                        <a href="{{ route('clients-accounts.page', ['page' => $page]) }}"> Go back</a>
+                        <a href="{{ route('clients-accounts.page', $page) }}"> Go back</a>
                     </span>
                 </button>
             </div>
@@ -41,62 +41,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>LT45 1674 1684 1354 3241</td>
-                        <td> 30000000 EUR</td>
-                        <td>
-                            <button class="ctrl-button ctrl-button-plus">
-                                <span>
-                                    <a href="{{ route('clients-edit', $client) }} ">+</a>
-                                </span>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="ctrl-button ctrl-button-minus">
-                                <span>
-                                    <a href="{{ route('clients-edit', $client) }} ">-</a>
-                                </span>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="ctrl-button ctrl-button-delete">
-                                <span>
-                                    <a href="{{ route('clients-edit', $client) }} ">x</a>
-                                </span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>LT45 1674 1684 1354 3241</td>
-                        <td> 70000 EUR</td>
-                        <td>
-                            <button class="ctrl-button ctrl-button-plus">
-                                <span>
-                                    <a href="{{ route('clients-edit', $client) }} ">+</a>
-                                </span>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="ctrl-button ctrl-button-minus">
-                                <span>
-                                    <a href="{{ route('clients-edit', $client) }} ">-</a>
-                                </span>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="ctrl-button ctrl-button-delete">
-                                <span>
-                                    <a href="{{ route('clients-edit', $client) }} ">x</a>
-                                </span>
-                            </button>
-                        </td>
-                    </tr>
+                    @forelse($accs as $acc)
+                        <tr>
+                            @php
+                                $iban = $acc->iban;
+                                $formatted_iban = substr($iban, 0, 4) . ' ' . substr($iban, 4, 4) . ' ' . substr($iban, 8, 4) . ' ' . substr($iban, 12, 4) . ' ' . substr($iban, 16);
+                            @endphp
+                            <td>{{ $formatted_iban }}</td>
+                            <td> {{ $acc->balance }} EUR</td>
+                            <td>
+                                <button class="ctrl-button ctrl-button-plus">
+                                    <span>
+                                        <a href="{{ route('clients-edit', $client) }} ">+</a>
+                                    </span>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="ctrl-button ctrl-button-minus">
+                                    <span>
+                                        <a href="{{ route('clients-edit', $client) }} ">-</a>
+                                    </span>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="ctrl-button ctrl-button-delete">
+                                    <span>
+                                        <a href="{{ route('clients-edit', $client) }} ">x</a>
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5">Client doesn't have available accounts just yet.</td>
+                        </tr>
+                    @endforelse
+
+
                     <tr>
                         <td>Create new account: </td>
                         <td colspan="4">
                             <button class="ctrl-button ctrl-button-create">
                                 <span>
-                                    <a href="#">Create</a>
+                                    <a
+                                        href="{{ route('accounts-store', ['client' => $client, 'page' => $page]) }}">Create</a>
                                 </span>
                             </button>
                         </td>
@@ -104,8 +92,16 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>Total balance: </td>
-                        <td> 100000 EUR</td>
+                        @if (count($accs) != 0)
+                            <td>Total balance: </td>
+                            @php
+                                $formattedBalance = number_format((float) $accs->sum('balance'), 2, '.', '');
+                            @endphp
+                            <td> {{ $formattedBalance }} EUR</td>
+                        @else
+                            <td>Total balance: </td>
+                            <td></td>
+                        @endif
                     </tr>
                 </tfoot>
             </table>

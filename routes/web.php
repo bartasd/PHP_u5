@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientController AS C;
-//use App\Http\Controllers\AccountController AS A;
+use App\Http\Controllers\AccountController AS A;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +31,22 @@ Route::prefix('clients')->name('clients-')->group(function () {
     Route::post('/add', [C::class, 'store'])->name('store');
     Route::get('/accounts', [C::class, 'showAll'])->name('accounts');
     Route::get('/accounts/{page}', [C::class, 'showAll'])->name('accounts.page');
-    Route::get('/{client}/{page}', [C::class, 'show'])->name('show');
     Route::get('/{client}/edit', [C::class, 'edit'])->name('edit');
+    Route::get('/{client}/{page}', [C::class, 'show'])->name('show');
     Route::post('/{client}', [C::class, 'update'])->name('update');
+    //Route::get('/{client}/delete', [C::class, 'delete'])->name('delete');
+    //Route::delete('/{client}', [C::class, 'destroy'])->name('destroy');
+});
+
+// Accounts CRUD Group
+Route::prefix('accounts')->name('accounts-')->group(function () {
+    //Route::get('/add', [C::class, 'create'])->name('create');
+    Route::get('/{client}/{page}', [A::class, 'store'])->name('store');
+    //Route::get('/accounts', [C::class, 'showAll'])->name('accounts');
+    //Route::get('/accounts/{page}', [C::class, 'showAll'])->name('accounts.page');
+    //Route::get('/{client}/edit', [C::class, 'edit'])->name('edit');
+    //Route::get('/{client}/{page}', [C::class, 'show'])->name('show');
+    //Route::post('/{client}', [C::class, 'update'])->name('update');
     //Route::get('/{client}/delete', [C::class, 'delete'])->name('delete');
     //Route::delete('/{client}', [C::class, 'destroy'])->name('destroy');
 });

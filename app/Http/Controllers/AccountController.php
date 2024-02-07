@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\Client;
+use App\Services\GenerateIban;
 
 class AccountController extends Controller
 {
@@ -19,9 +21,14 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAccountRequest $request)
+    public function store(Client $client, $page)
     {
-        //
+        $info = [];
+        $info['owner_id'] = $client->id;
+        $info['iban'] = GenerateIban::getIBAN();
+        $info['balance'] = 0;
+        Account::create($info);
+        return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
     }
 
     /**

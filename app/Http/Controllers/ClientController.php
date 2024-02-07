@@ -5,21 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
+use App\Models\Account;
 
 class ClientController extends Controller
 {
 
     public function showAll($page = 1){
+        $accs = Account::all();
         $clients = Client::all();
         return view('clients.accounts', [
             'clients' => $clients,
-            'page' => $page
+            'page' => $page,
+            'accs' => $accs
         ]);
     }
     public function show(Client $client, $page ){
+        $accs = Account::where('owner_id', $client->id)->get();
         return view('clients.show', [
             'client' => $client,
-            'page' => $page
+            'page' => $page,
+            'accs' => $accs
         ]);
     }
     
@@ -44,7 +49,7 @@ class ClientController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Client $client)
-    {        
+    {
         return view('clients.edit', [
             'client' => $client,
         ]);
