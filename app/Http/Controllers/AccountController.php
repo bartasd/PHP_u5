@@ -42,24 +42,39 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Account $account)
+
+    public function edit(Client $client, Account $account, $action, $page)
     {
-        //
+        return view('accounts.edit', [
+            'account' => $account,
+            'client' => $client,
+            'action' => $action,
+            'page' => $page
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAccountRequest $request, Account $account)
+    public function update(UpdateAccountRequest $request, Client $client, Account $account, $action, $page)
     {
-        //
+        if($action == "plus"){
+            $account->balance = $account->balance + $request->ammount;
+        }
+        else{
+            $account->balance = $account->balance - $request->ammount;
+        }
+        $account->update();
+        return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Account $account)
+    public function destroy(Account $account, Client $client, $page)
     {
-        //
+        $account->delete();
+        return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
     }
 }

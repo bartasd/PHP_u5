@@ -17,7 +17,7 @@
             <div>
                 <button class="button" id="edit">
                     <span>
-                        <a href={{ route('clients-edit', $client) }}>Edit</a>
+                        <a href={{ route('clients-edit', ['client' => $client, 'page' => $page]) }}>Edit</a>
                     </span>
                 </button>
                 <button class="button" id="go-back">
@@ -46,29 +46,34 @@
                             @php
                                 $iban = $acc->iban;
                                 $formatted_iban = substr($iban, 0, 4) . ' ' . substr($iban, 4, 4) . ' ' . substr($iban, 8, 4) . ' ' . substr($iban, 12, 4) . ' ' . substr($iban, 16);
+                                $formatted_bal = number_format((float) $acc->balance, 2, '.', '');
                             @endphp
                             <td>{{ $formatted_iban }}</td>
-                            <td> {{ $acc->balance }} EUR</td>
+                            <td> {{ $formatted_bal }} EUR</td>
                             <td>
                                 <button class="ctrl-button ctrl-button-plus">
                                     <span>
-                                        <a href="{{ route('clients-edit', $client) }} ">+</a>
+                                        <a
+                                            href="{{ route('accounts-edit', ['client' => $client, 'account' => $acc, 'action' => 'plus', 'page' => $page]) }} ">+</a>
                                     </span>
                                 </button>
                             </td>
                             <td>
                                 <button class="ctrl-button ctrl-button-minus">
                                     <span>
-                                        <a href="{{ route('clients-edit', $client) }} ">-</a>
+                                        <a
+                                            href="{{ route('accounts-edit', ['client' => $client, 'account' => $acc, 'action' => 'minus', 'page' => $page]) }} ">-</a>
                                     </span>
                                 </button>
                             </td>
-                            <td>
-                                <button class="ctrl-button ctrl-button-delete">
-                                    <span>
-                                        <a href="{{ route('clients-edit', $client) }} ">x</a>
-                                    </span>
-                                </button>
+                            <td class="multi-button">
+                                <form class="ctrl-button ctrl-button-delete meh"
+                                    action="{{ route('accounts-destroy', ['account' => $acc, 'client' => $client, 'page' => $page]) }}"
+                                    method="post">
+                                    <button type="submit"><span>x</span></button>
+                                    @csrf
+                                    @method('delete')
+                                </form>
                             </td>
                         </tr>
                     @empty

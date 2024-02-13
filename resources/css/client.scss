@@ -100,6 +100,18 @@
     border: 1px solid white;
 }
 
+.meh button{
+    height: 100%;
+    width: 50%;
+    border: 1px solid white;
+    background-color: rgb(219, 75, 75);
+    cursor: pointer;
+} 
+
+.meh span{
+    background-color: rgb(219, 75, 75);
+}
+
 .ctrl-button a{
     color: black;
 }
@@ -117,4 +129,16 @@
 .ctrl-button-create, .ctrl-button-create a{
     background-color: rgb(85,131,241);
     width: 80%;
+}
+
+.account-edit{
+    width: 450px;
+}
+
+.account-edit p{
+    margin-bottom: 10px;
+}
+
+.account-edit p:last-of-type{
+    margin-bottom: 40px;
 }

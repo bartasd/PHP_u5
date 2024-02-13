@@ -79,9 +79,11 @@
                                     </button>
                                 </td>
                                 <td class="multi-button">
-                                    <button class="button" id="delete">
-                                        <span>Delete</span>
-                                    </button>
+                                    <form action="{{ route('clients-destroy', $clients[$i]) }}" method="post">
+                                        <button type="submit" class="button" id="delete"><span>Delete</span></button>
+                                        @csrf
+                                        @method('delete')
+                                    </form>
                                 </td>
                             </tr>
                         @else

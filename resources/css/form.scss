@@ -21,14 +21,17 @@ form {
   text-align: center;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:stretch, center;
 
   p {
     font-weight: 500;
     color: #fff;
     opacity: 0.7;
     font-size: 1.4rem;
-    margin-top: 0;
-    margin-bottom: 60px;
+
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     background-color: #84646c;
     backdrop-filter: blur(10px);
@@ -50,9 +53,7 @@ form {
   
   input {
     background-color: rgba(255, 255, 255, 0.2);
-    width: 350px;
     padding: 1em;
-    margin-bottom: 2em;
     border: none;
     border-left: 1px solid $white;
     border-top: 1px solid $white;

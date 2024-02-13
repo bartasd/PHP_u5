@@ -6,6 +6,8 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use App\Models\Account;
+use Illuminate\Http\Request;
+
 
 class ClientController extends Controller
 {
@@ -48,18 +50,19 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client)
+    public function edit(Client $client, $page)
     {
         return view('clients.edit', [
             'client' => $client,
+            'page' =>$page
         ]);
     }
 
 
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client, $page)
     {
         $client->update($request->all());
-        return redirect()->route('clients-accounts');
+        return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
     }
 
     /**
@@ -67,6 +70,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect()->route('clients-accounts');
     }
 }

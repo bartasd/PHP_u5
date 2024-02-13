@@ -1,8 +1,9 @@
-$fieldWidth: 70vw;
-$fieldHeight: calc(88vh - 170px);
+$fieldWidth: 57vw;
+$fieldHeight: calc(88vh - 193px);
 
 .workField {
     background: url("http://localhost:8080/u5/public/elephant.png");
+    background-size: contain;
     width: $fieldWidth;
     height: $fieldHeight;
     position: absolute;
@@ -83,7 +84,7 @@ table {
     width: 60px;
   }
   tfoot a{
-padding: 20px;
+  padding: 20px;
   }
 
   tbody tr:hover {
@@ -104,15 +105,19 @@ padding: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 15px 0 rgba(0, 0, 0, 0.1);
     place-items: center;
   }
+  .multi-button form {
+    all: unset;
+  }
   #info a, #go-back a{
     background-color: rgb(85,131,241);
   }
   #edit a{
     background-color: rgb(78, 201, 54);
   }
-  #delete a{
+  #delete a, #delete2 a{
     background-color: rgb(219, 75, 75);
   }
+
 
   #info, #info span, #go-back, #go-back span {
     background-color: rgb(85,131,241);
@@ -128,7 +133,7 @@ padding: 20px;
     border: 1px solid rgb(78, 201, 54);
   }
   
-  #delete, #delete span {
+  #delete, #delete span, #delete2, #delete2 span {
     background-color: rgb(219, 75, 75);
     border: 1px solid rgb(219, 75, 75);
   }
