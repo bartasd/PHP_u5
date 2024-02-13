@@ -1,0 +1,71 @@
+$letters2: rgb(45, 62, 66);
+$shadow: rgba(110, 109, 88, 0.8);
+$quad: 400px;
+$stbl: 650px;
+
+.stabilizer {
+  position: relative;
+  width: $stbl;
+  display: flex;
+  align-items: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  align-items:center;
+  justify-content: center;
+  box-shadow: 15px 15px 30px $shadow;
+  border-radius: 10px;
+  background-color: white;
+
+}
+
+.stab2{
+  width: calc($quad + 30px);
+  height: $quad;
+  position: absolute;
+  margin-left: 230px;
+  display: flex;
+  justify-content: right;
+  border-radius: 10px;
+}
+
+.loginBrand {
+  background: url("http://localhost:8080/u5/public/bank.png");
+  background-size: 350px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(194,209,255);
+  box-shadow: -15px 15px 30px $shadow;
+  border-radius: 10px;
+  width: $quad;
+  height: $quad;
+  position: absolute;
+  z-index: 1;
+}
+
+.loginForm label {
+  color: $letters2;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  background-color: white;
+}
+
+.loginForm label b{
+  background-color: white;
+}
+
+.loginForm input {
+  color: $letters2;
+  background-color: white;
+}
+
+.submitBtn {
+  margin-top: 1rem;
+  border-radius: 5px;
+  width: 200px;
+  background-color: white;
+}

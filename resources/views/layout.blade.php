@@ -31,8 +31,14 @@
                 aria-hidden="true"></i><span class="text">Add Accounts</span></a>
         <a href="{{ route('transfer') }}" class="{{ Request::routeIs('transfer') ? 'active activeLara' : '' }}"><i
                 class="fa fa-exchange" aria-hidden="true"></i><span class="text">Transfer</span></a>
-        <a href="{{ route('exit') }}" class="{{ Request::routeIs('exit') ? 'active activeLara' : '' }}"><i
-                class="fa fa-sign-out" aria-hidden="true"></i><span class="text">Sign Out</span></a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="reset">
+            @csrf
+            <button type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="text">Log
+                    Out</span></button>
+        </form>
+
+
     </div>
 </body>
 

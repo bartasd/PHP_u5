@@ -33,9 +33,7 @@ class HomeController extends Controller
     }
 
     public function signout(){
-        return view('start', [
-            'page' => "EXIT"
-        ]);
+        return view('home');
     }
 
 

@@ -55,9 +55,6 @@ body * {
 .nav a:first-child {
     margin-left: 45px;
 }
-.nav a:last-of-type {
-    margin-right: 45px;
-}
 
 .nav i {
     font-size: 48px;
@@ -118,3 +115,18 @@ body * {
     position: absolute;
     top: 110px;
 }
+.reset{
+    all: unset;
+}
+
+#logout-form {
+    margin-right: 45px;
+    display: flex;
+}
+
+#logout-form button{
+    background-color: $tableColor;
+    border: none;
+    cursor: pointer;
+}
+

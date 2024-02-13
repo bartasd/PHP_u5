@@ -11,7 +11,8 @@ export default defineConfig({
                 'resources/css/app.scss',
                 'resources/css/workField.scss',
                 'resources/css/form.scss',
-                'resources/css/client.scss'
+                'resources/css/client.scss',
+                'resources/css/login.scss'
             ],
             refresh: true,
         }),

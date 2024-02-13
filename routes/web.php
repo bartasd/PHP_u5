@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeController AS H;
 use App\Http\Controllers\ClientController AS C;
 use App\Http\Controllers\AccountController AS A;
 
@@ -22,9 +22,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'home'])->name('home');
-Route::get('/transfer', [HomeController::class, 'transfer'])->name('transfer');
-Route::get('/', [HomeController::class, 'signout'])->name('exit');
+Route::get('/home', [H::class, 'home'])->name('home');
+Route::get('/transfer', [H::class, 'transfer'])->name('transfer');
+Route::get('/', [H::class, 'signout'])->name('exit');
 
 // Clients CRUD Group
 Route::prefix('clients')->name('clients-')->group(function () {
