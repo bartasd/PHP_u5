@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
 
-    public function showAll($page = 1){
+    public function showAll($page = 1, $clientsFrom = null){
         $accs = Account::all();
-        $clients = Client::all();
+        $clients = $clientsFrom ?? Client::all()->sortBy('surname')->values();
         return view('clients.accounts', [
             'clients' => $clients,
             'page' => $page,
@@ -65,12 +65,39 @@ class ClientController extends Controller
         return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+ 
     public function destroy(Client $client)
     {
-        $client->delete();
+        $totalBalance = Account::where('owner_id', $client->id)->pluck('balance')->sum();
+        if($totalBalance == 0){
+            $client->delete();
+        }
+        else{
+            //  IMPLEMENT MESSAGE - YOUR TOTAL BALANCE HAS TO BE ZERO
+        }
         return redirect()->route('clients-accounts');
+    }
+
+
+    public function sortBy(Request $request, $page)
+    {
+        $clients = Client::all();
+        $r = explode("_", $request->sort);
+        $sortby = $r[0];
+        $mode = $r[1];
+        $sorted = null;
+        if($mode == "a"){
+            $sorted = $clients->sortBy($sortby)->values();
+        }
+        else{
+            $sorted = $clients->sortByDesc($sortby)->values();
+        }
+        return $this->showAll($page, $sorted);
+    }
+
+    public function filterBy(Request $request, $page)
+    {
+        $accs = Account::all();
+        return $this->showAll($page, );
     }
 }

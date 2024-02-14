@@ -74,7 +74,12 @@ class AccountController extends Controller
      */
     public function destroy(Account $account, Client $client, $page)
     {
-        $account->delete();
-        return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
+        if($account->balance == 0){
+            $account->delete();
+        }
+        else{
+            //  IMPLEMENT MESSAGE - YOUR ACCOUNT HAS CASH IN IT/OR IS NEGATIVE...
+        }
+        return redirect()->route('clients-show', compact(['client','page']));
     }
 }

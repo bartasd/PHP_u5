@@ -32,6 +32,8 @@ Route::prefix('clients')->name('clients-')->group(function () {
     Route::post('/add', [C::class, 'store'])->name('store');
     Route::get('/accounts', [C::class, 'showAll'])->name('accounts');
     Route::get('/accounts/{page}', [C::class, 'showAll'])->name('accounts.page');
+    Route::post('/accounts/{page}/sort', [C::class, 'sortBy'])->name('sort');
+    Route::post('/accounts/{page}/filter', [C::class, 'filterBy'])->name('filter');
     Route::get('/{client}/{page}/edit', [C::class, 'edit'])->name('edit');
     Route::get('/{client}/{page}/show', [C::class, 'show'])->name('show');
     Route::post('/{client}/{page}', [C::class, 'update'])->name('update');

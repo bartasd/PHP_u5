@@ -22,7 +22,11 @@
                 </button>
                 <button class="button" id="go-back">
                     <span>
-                        <a href="{{ route('clients-accounts.page', $page) }}"> Go back</a>
+                        @if ($page == 0)
+                            <a href="{{ route('home') }}"> Go back</a>
+                        @else
+                            <a href="{{ route('clients-accounts.page', $page) }}"> Go back</a>
+                        @endif
                     </span>
                 </button>
             </div>
