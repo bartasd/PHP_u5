@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use App\Models\Account;
 use Illuminate\Http\Request;
-
+use App\Services\IdValidator;
 
 class ClientController extends Controller
 {
@@ -43,6 +43,19 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
+        $validID = IdValidator::validateID($request->id_code);
+        if(!$validID){
+            // generate message that this id is invalid
+            return redirect()->route('clients-accounts');
+        }
+        if(Client::all()->pluck('id_code')->contains($request->id_code)){
+            // generate message that this id already exist
+            return redirect()->route('clients-accounts');
+        }
+        if(strlen($request->name) < 4 || strlen($request->surname) < 4){
+            // generate message that name or surname is too short
+            return redirect()->route('clients-accounts');
+        }
         Client::create($request->all());
         return redirect()->route('clients-accounts');
     }

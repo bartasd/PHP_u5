@@ -61,11 +61,17 @@ class AccountController extends Controller
     {
         if($action == "plus"){
             $account->balance = $account->balance + $request->ammount;
+            $account->update();
         }
         else{
-            $account->balance = $account->balance - $request->ammount;
+            if($account->balance >= $request->ammount){
+                $account->balance = $account->balance - $request->ammount;
+                $account->update();
+            }
+            else{
+                // GENERATE MESSAGE THAT THE AMMOUNT CANNOT BE CONTRACTED
+            }
         }
-        $account->update();
         return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
     }
 
