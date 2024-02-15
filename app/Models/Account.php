@@ -14,4 +14,8 @@ class Account extends Model
         'iban',
         'balance'
     ];
+
+    public function clients(){
+        return $this->belongsTo(Client::class);
+    }
 }

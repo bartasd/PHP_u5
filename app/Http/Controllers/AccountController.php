@@ -88,4 +88,11 @@ class AccountController extends Controller
         }
         return redirect()->route('clients-show', compact(['client','page']));
     }
+ 
+    public function transfer(){
+        $combo = Client::join('accounts', 'clients.id', '=', 'accounts.owner_id')->get()->sortBy('id')->values();
+        return view('accounts.transfer', [
+            'combo' => $combo
+        ]);
+    }
 }

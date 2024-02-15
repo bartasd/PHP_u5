@@ -111,7 +111,7 @@ table {
   #info a, #go-back a{
     background-color: rgb(85,131,241);
   }
-  #edit a{
+  #edit a, #transfer a{
     background-color: rgb(78, 201, 54);
   }
   #delete a, #delete2 a{
@@ -128,7 +128,7 @@ table {
     position: initial;
   }
 
-  #edit, #edit span {
+  #edit, #edit span, #transfer, #transfer span {
     background-color: rgb(78, 201, 54);
     border: 1px solid rgb(78, 201, 54);
   }
@@ -195,6 +195,11 @@ table {
     content: "\f060";
   }
 
+  #transfer span:after {
+    font-family: FontAwesome;
+    content: "\f003";
+  }
+
   .rewind:before{
     font-family: FontAwesome;
     content: "\f04a";
@@ -242,4 +247,58 @@ table {
 .stats td{
   padding: 0.5rem;
   width: 10%;
+}
+
+.transferSelect, .transferSelect option{
+  background-color: white;
+}
+
+.transferForm > div, .deductForm > div{
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.deductForm > div{
+  margin: 0;
+}
+
+.transferForm input, .deductForm input{
+  background-color: white;
+  color: black;
+}
+.transferForm input:hover, .deductForm input:hover{
+  background-color: white;
+  color: red;
+}
+
+.transferForm input::placeholder,  .deductForm input::placeholder{
+  color: black;
+  font-size: 1rem;
+  padding: 0.2rem 3rem;
+}
+
+
+.transfer{
+  width: 60%;
+  height: 40%;
+  position: unset;
+}
+
+.transfer h2{
+  font-size: 1.5rem;
+  background: transparent;
+}
+
+.transfer h2:last-of-type{
+  padding-top: 20px;
+}
+
+.taxes{
+  height: 20%;
+}
+.taxes_title{
+  font-size: 1.5rem;
+  color: white;
+  background: transparent;
+  padding: 30px 0;
 }

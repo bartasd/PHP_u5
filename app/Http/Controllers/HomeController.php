@@ -32,12 +32,6 @@ class HomeController extends Controller
             'accounts' => $accounts
         ]);
     }
-    
-    public function transfer(){
-        return view('start', [
-            'page' => "transfer"
-        ]);
-    }
 
     public function signout(){
         return view('home');

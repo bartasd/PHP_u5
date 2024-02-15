@@ -23,7 +23,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [H::class, 'home'])->name('home');
-Route::get('/transfer', [H::class, 'transfer'])->name('transfer');
 Route::get('/', [H::class, 'signout'])->name('exit');
 
 // Clients CRUD Group
@@ -52,5 +51,6 @@ Route::prefix('accounts')->name('accounts-')->group(function () {
     Route::post('/{client}/{account}/{action}/{page}/update', [A::class, 'update'])->name('update');
     //Route::get('/{client}/delete', [C::class, 'delete'])->name('delete');
     Route::delete('/{account}/{client}/{page}/destroy', [A::class, 'destroy'])->name('destroy');
+    Route::get('/transfer', [A::class, 'transfer'])->name('transfer');
 });
 
