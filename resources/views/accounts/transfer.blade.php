@@ -4,13 +4,12 @@
     <div class="containerForm statisticsForm">
         <h1> TRANSFER PAGE</h1>
         <div class="client-info transfer">
-            {{-- {{ route('accounts-transferFrom') }} --}}
-            <form id="transfer_from" class="reset transferForm" action="#" method="post">
+            <form class="reset transferForm" action="{{ route('accounts-transferFunds') }}" method="post">
                 <h2>Transfer From</h2>
                 <select class="transferSelect" name="transferFromSelect" id="froms">
                     @foreach ($combo as $acc)
-                        <option value="{{ $acc->id }}_{{ $acc->iban }}">
-                            <b>{{ $acc->name }} {{ $acc->surname }}</b>: {{ $acc->iban }}
+                        <option value="{{ $acc->iban }}">
+                            <b>{{ $acc->client->name }} {{ $acc->client->surname }}</b>: {{ $acc->iban }}
                             <b>{{ $acc->balance }} EUR</b>
                         </option>
                     @endforeach
@@ -18,14 +17,14 @@
                 <h2>Transfer To</h2>
                 <select class="transferSelect" name="transferToSelect" id="tos">
                     @foreach ($combo as $acc)
-                        <option value="{{ $acc->id }}_{{ $acc->iban }}">
-                            <b>{{ $acc->name }} {{ $acc->surname }}</b>: {{ $acc->iban }}
+                        <option value="{{ $acc->iban }}">
+                            <b>{{ $acc->client->name }} {{ $acc->client->surname }}</b>: {{ $acc->iban }}
                             <b>{{ $acc->balance }} EUR</b>
                         </option>
                     @endforeach
                 </select>
                 <div>
-                    <input class="reset" type="text" placeholder="Enter an ammount to transfer"name="ammount"
+                    <input class="reset tr-input" type="text" placeholder="Enter an ammount to transfer"name="ammount"
                         required><br>
                     <button type="submit" class="button" id="transfer">
                         <span>Transfer</span>
@@ -37,7 +36,7 @@
         </div>
         <h2 class="taxes_title"> Deduct Taxes</h2>
         <div class="client-info transfer taxes">
-            <form id="deduct_from" class="reset deductForm" action="#" method="post">
+            <form class="reset deductForm" action="{{ route('accounts-deductTaxes') }}" method="post">
                 <div>
                     <input class="reset" type="text" placeholder="Enter an ammount to deduct"name="ammount"
                         required><br>

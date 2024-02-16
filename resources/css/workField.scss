@@ -262,16 +262,16 @@ table {
   margin: 0;
 }
 
-.transferForm input, .deductForm input{
+.tr-input, .deductForm input{
   background-color: white;
   color: black;
 }
-.transferForm input:hover, .deductForm input:hover{
+.tr-input:hover, .deductForm input:hover{
   background-color: white;
   color: red;
 }
 
-.transferForm input::placeholder,  .deductForm input::placeholder{
+.tr-input::placeholder,  .deductForm input::placeholder{
   color: black;
   font-size: 1rem;
   padding: 0.2rem 3rem;

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
 use App\Models\Client;
 use App\Services\GenerateIban;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
@@ -53,10 +54,6 @@ class AccountController extends Controller
         ]);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateAccountRequest $request, Client $client, Account $account, $action, $page)
     {
         if($action == "plus"){
@@ -90,9 +87,49 @@ class AccountController extends Controller
     }
  
     public function transfer(){
-        $combo = Client::join('accounts', 'clients.id', '=', 'accounts.owner_id')->get()->sortBy('id')->values();
         return view('accounts.transfer', [
-            'combo' => $combo
+            'combo' =>  Account::all()->sortBy('owner_id')->values()
         ]);
+    }
+
+    public function transferFunds(Request $request){ 
+        $fromIBAN =  $request->transferFromSelect;
+        $toIBAN   =  $request->transferToSelect;
+        $ammount = $request->ammount;
+        if($fromIBAN == $toIBAN ){
+            // show message that you cannot wire money to yourself
+            return redirect()->route('accounts-transfer');
+        }
+        if($ammount <= 0 ){
+            // show message that you cannot trasnfer zero or negative ammounts
+            return redirect()->route('accounts-transfer');
+        }
+        $donorAcc   = Account::all()->where('iban', $fromIBAN )->first();
+        $patientAcc = Account::all()->where('iban', $toIBAN )->first();   
+        if($donorAcc->balance < $ammount){
+            // show meesage that transfer cannot be done due to insufficient funds
+            return redirect()->route('accounts-transfer');
+        }
+        $donorAcc->balance -= $ammount;
+        $patientAcc->balance += $ammount;
+        $donorAcc->update();
+        $patientAcc->update();
+        return redirect()->route('accounts-transfer');
+    }
+
+    public function deductTaxes(Request $request){ 
+        $tax = $request->ammount;
+        if($tax <= 0 ){
+            // show message that you cannot tax zero or negative taxes
+            return redirect()->route('accounts-transfer');
+        }
+        $allAccs = Account::all()->groupBy('owner_id')->map(function ($collection) {
+            return $collection->random();
+        });
+        foreach ($allAccs as $acc) {
+            $acc->balance -= $tax;
+            $acc->update();
+        }
+        return redirect()->route('accounts-transfer');
     }
 }

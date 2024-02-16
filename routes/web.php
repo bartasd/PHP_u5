@@ -52,5 +52,7 @@ Route::prefix('accounts')->name('accounts-')->group(function () {
     //Route::get('/{client}/delete', [C::class, 'delete'])->name('delete');
     Route::delete('/{account}/{client}/{page}/destroy', [A::class, 'destroy'])->name('destroy');
     Route::get('/transfer', [A::class, 'transfer'])->name('transfer');
+    Route::post('/transfer', [A::class, 'transferFunds'])->name('transferFunds');
+    Route::post('/deduct', [A::class, 'deductTaxes'])->name('deductTaxes');
 });
 

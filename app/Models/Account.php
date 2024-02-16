@@ -15,7 +15,7 @@ class Account extends Model
         'balance'
     ];
 
-    public function clients(){
-        return $this->belongsTo(Client::class);
+    public function client(){
+        return $this->belongsTo(Client::class, "owner_id");
     }
 }
