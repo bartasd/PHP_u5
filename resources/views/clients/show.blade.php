@@ -90,12 +90,18 @@
                     <tr>
                         <td>Create new account: </td>
                         <td colspan="4">
-                            <button class="ctrl-button ctrl-button-create">
-                                <span>
-                                    <a
-                                        href="{{ route('accounts-store', ['client' => $client, 'page' => $page]) }}">Create</a>
-                                </span>
-                            </button>
+                            <form class="reset deductForm"
+                                action="{{ route('accounts-store', ['client' => $client, 'page' => $page]) }}"
+                                method="post">
+                                <div>
+                                    <button type="submit" class="ctrl-button ctrl-button-create">
+                                        <span>
+                                            <a>Create</a>
+                                        </span>
+                                    </button>
+                                </div>
+                                @csrf
+                            </form>
                         </td>
                     </tr>
                 </tbody>

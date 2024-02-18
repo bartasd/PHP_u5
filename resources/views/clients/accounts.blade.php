@@ -4,7 +4,7 @@
     <div class="acc-cont">
         <div class="filter-sorting">
             <div>
-                <form id="sorting_select" class="reset" action="{{ route('clients-sort', ['page' => $page]) }}" method="post">
+                <form id="sorting_select" class="reset" action="{{ route('clients-sort') }}" method="post">
                     <select name="sort" id="sorts">
                         <option value="surname_a" selected disabled hidden>Sort by:</option>
                         <option value="id_a">ID asc</option>
@@ -15,22 +15,12 @@
                         <option value="surname_d">Surname des</option>
                         <option value="id_code_a">ID code asc</option>
                         <option value="id_code_d">ID code des</option>
-                        <option value="balance_a">Balance asc</option>
-                        <option value="balance_d">Balance des</option>
                     </select>
                     @csrf
                 </form>
-                <script>
-                    const sortForm = document.getElementById("sorting_select");
-                    const sortSelect = document.getElementById("sorts");
-                    sortSelect.addEventListener("change", function() {
-                        sortForm.submit();
-                    });
-                </script>
             </div>
             <div>
-                <form id="filtering_select" class="reset" action="{{ route('clients-filter', ['page' => $page]) }}"
-                    method="post">
+                <form id="filtering_select" class="reset" action="{{ route('clients-filter') }}" method="post">
                     <select name="filter" id="filters">
                         <option value="all" selected disabled hidden>Filter by:</option>
                         <option value="all">All clients</option>
@@ -41,13 +31,6 @@
                     </select>
                     @csrf
                 </form>
-                <script>
-                    const filterForm = document.getElementById("filtering_select");
-                    const filterSelect = document.getElementById("filters");
-                    filterSelect.addEventListener("change", function() {
-                        filterForm.submit();
-                    });
-                </script>
             </div>
         </div>
 

@@ -137,6 +137,17 @@ table {
     background-color: rgb(219, 75, 75);
     border: 1px solid rgb(219, 75, 75);
   }
+
+  #check, #check span{
+    background-color: white;
+    border: 1px solid white;
+  }
+
+  #check a, #check span{
+    color: black;
+    background-color: white;
+    font-size: 2rem;
+  }
   
   .button { 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 15px 0 rgba(0, 0, 0, 0.09);
@@ -170,6 +181,9 @@ table {
   .button:hover span {
     padding-right: 25px;
   }
+  #check:hover span {
+    padding-right: 50px;
+  }
   
   .button:hover span:after {
     opacity: 1;
@@ -198,6 +212,12 @@ table {
   #transfer span:after {
     font-family: FontAwesome;
     content: "\f003";
+  }
+
+  #check span:after {
+    font-family: FontAwesome;
+    content: "\f046";
+    right: -5px;
   }
 
   .rewind:before{
@@ -301,4 +321,112 @@ table {
   color: white;
   background: transparent;
   padding: 30px 0;
+}
+
+.modal-div{
+}
+
+.modal-div p{
+  background: transparent;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.modal-div p:last-of-type{
+  padding-bottom: 2rem;
+}
+.modal-div span{
+  background: transparent;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: red;
+}
+
+.transfer-modal{
+  flex-direction: row;
+  gap: 30px;
+}
+
+.modal-btn{
+  width: 200px;
+}
+.modal-btn a, .modal-btn span{
+  color: white;
+}
+
+.message-box{
+  position: absolute;
+  z-index: 1;
+  width: 600px;
+  height: 300px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.message-box h1, .message-box p {
+  color: white;
+  background: transparent;
+  text-align: center;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.success-box{
+  background-color: rgb(78, 201, 54);
+}
+
+.error-box{
+  background-color: rgb(219, 75, 75);
+}
+
+.gone{
+  display: none;
+}
+
+.add-box{
+height: 400px;
+}
+
+.add-form{
+height: 300px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.add-form h1{
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.add-form h2{
+  padding-bottom: 5px;
+  text-align: center;
+}
+.add-form h2:last-of-type{
+  padding-bottom: 30px;
+}
+
+.add-form input{
+  padding: 5px 10px;
+  border-radius: 0;
+  background-color: white;
+  color: black;
+
+}
+.add-form input::placeholder{
+  color: black;
+}
+
+.add-form input:hover{
+  background-color: white;
+}
+
+.some-buttons{
+  display: flex;
+  gap: 30px;
 }

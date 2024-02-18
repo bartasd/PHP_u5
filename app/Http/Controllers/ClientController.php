@@ -12,9 +12,55 @@ use App\Services\IdValidator;
 class ClientController extends Controller
 {
 
-    public function showAll($page = 1, $clientsFrom = null){
+    public function showAll($page = 1){
         $accs = Account::all();
-        $clients = $clientsFrom ?? Client::all()->sortBy('surname')->values();
+        $clients = Client::all();
+
+        // FILTERING
+        if (session()->has('filter')) {
+            $filter = session('filter');
+            if($filter == "all"){
+                $clients = Client::all();
+            }
+            else if($filter == "no_acc"){
+                $clients = $clients->filter(function (Client $client) {
+                    return $client->accounts()->count() == 0;
+                })->values();
+            }
+            else if($filter == "empty_acc"){
+                $clients = $clients->filter(function (Client $client) {
+                    return $client->accounts()->where('balance', 0)->exists();
+                })->values();
+            }
+            else if($filter == "non_empty_acc"){
+                $clients = Client::all()->filter(function (Client $client) {
+                    return $client->accounts()->sum('balance') > 0;
+                })->values();
+            }   
+            else if ($filter == "negative_acc") {
+                $clients = $clients->filter(function (Client $client) {
+                    return $client->accounts()->where('balance', '<', 0)->exists();
+                })->values();
+            }
+        }
+
+
+        // SORTING
+        if (session()->has('sorter')){
+            $sortby = session('sortby');
+            $mode = session('mode');
+            if($mode == "a"){
+                $clients = $clients->sortBy($sortby)->values();
+            }
+            else{
+                $clients = $clients->sortByDesc($sortby)->values();
+            }
+        }
+        else{
+            $clients = $clients->sortBy('surname')->values();
+        }
+
+
         return view('clients.accounts', [
             'clients' => $clients,
             'page' => $page,
@@ -45,18 +91,23 @@ class ClientController extends Controller
     {
         $validID = IdValidator::validateID($request->id_code);
         if(!$validID){
-            // generate message that this id is invalid
+            session(['message' => "It seems your id: {$request->id_code} is invalid. Please try again."]);
+            session(['type' => 'error']);
             return redirect()->route('clients-accounts');
         }
         if(Client::all()->pluck('id_code')->contains($request->id_code)){
-            // generate message that this id already exist
+            session(['message' => "It seems there already is a client with this ID. Please check your ID."]);
+            session(['type' => 'error']);
             return redirect()->route('clients-accounts');
         }
         if(strlen($request->name) < 4 || strlen($request->surname) < 4){
-            // generate message that name or surname is too short
+            session(['message' => "Your name/surname is too short. Please try again."]);
+            session(['type' => 'error']);
             return redirect()->route('clients-accounts');
         }
         Client::create($request->all());
+        session(['message' => "A client: {$request->name} {$request->surname} has been created."]);
+        session(['type' => 'success']);
         return redirect()->route('clients-accounts');
     }
 
@@ -74,6 +125,8 @@ class ClientController extends Controller
 
     public function update(UpdateClientRequest $request, Client $client, $page)
     {
+        session(['message' => "A client: {$client->name} {$client->surname} has been updated to: {$request->name} {$request->surname}."]);
+        session(['type' => 'success']);
         $client->update($request->all());
         return redirect()->route('clients-show', ['client' => $client, 'page' => $page]);
     }
@@ -83,34 +136,58 @@ class ClientController extends Controller
     {
         $totalBalance = Account::where('owner_id', $client->id)->pluck('balance')->sum();
         if($totalBalance == 0){
+            session(['message' => "A client: {$client->name} {$client->surname} has been deleted."]);
+            session(['type' => 'success']);
             $client->delete();
+            
         }
         else{
-            //  IMPLEMENT MESSAGE - YOUR TOTAL BALANCE HAS TO BE ZERO
+            session(['message' => "A client: {$client->name} {$client->surname} cannot be deleted because, it's accounts must be eqaul to zero."]);
+            session(['type' => 'error']);
         }
         return redirect()->route('clients-accounts');
     }
 
 
-    public function sortBy(Request $request, $page)
+    public function sortBy(Request $request)
     {
-        $clients = Client::all();
-        $r = explode("_", $request->sort);
-        $sortby = $r[0];
-        $mode = $r[1];
-        $sorted = null;
-        if($mode == "a"){
-            $sorted = $clients->sortBy($sortby)->values();
+        session(['sorter' => 'true']);
+        $sortby = null;
+        $mode = null;
+        $r = null;
+        $fullSort = $request->sort;
+        $r = explode("_", $fullSort); 
+        if($fullSort == "id_code_a" || $fullSort == "id_code_d"){
+            $sortby = "id_code";
+            $mode = $r[2];
         }
         else{
-            $sorted = $clients->sortByDesc($sortby)->values();
+            $sortby = $r[0];
+            $mode = $r[1];
         }
-        return $this->showAll($page, $sorted);
+        session(['sortby' => $sortby]);
+        session(['mode' => $mode]);
+        return $this->showAll();
     }
 
-    public function filterBy(Request $request, $page)
+    public function filterBy(Request $request)
     {
-        $accs = Account::all();
-        return $this->showAll($page, );
+        $filter = $request->filter;
+        if($filter == "all"){
+            session(['filter' => 'all']);
+        }
+        else if($filter == "no_acc"){
+            session(['filter' => 'no_acc']);
+        }
+        else if($filter == "empty_acc"){
+            session(['filter' => 'empty_acc']);
+        }
+        else if($filter == "non_empty_acc"){
+            session(['filter' => 'non_empty_acc']);
+        }   
+        else if ($filter == "negative_acc") {
+            session(['filter' => 'negative_acc']);
+        }
+        return $this->showAll();
     }
 }

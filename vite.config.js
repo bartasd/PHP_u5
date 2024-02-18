@@ -8,6 +8,7 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/js/my.js',
                 'resources/css/app.scss',
                 'resources/css/workField.scss',
                 'resources/css/form.scss',

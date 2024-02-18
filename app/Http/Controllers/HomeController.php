@@ -32,10 +32,4 @@ class HomeController extends Controller
             'accounts' => $accounts
         ]);
     }
-
-    public function signout(){
-        return view('home');
-    }
-
-
 }
